@@ -1,5 +1,5 @@
-# The "slim" versions are sensible starting
-# points for other lightweight Python-based images
+# "slim" 버전은 다른 경량의 파이썬 기반 이미지들을
+# 시작하기 위한 좋은 지점이다.
 FROM python:3.9-slim
 WORKDIR /app/
 

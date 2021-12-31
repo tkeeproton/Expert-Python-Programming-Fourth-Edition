@@ -2,17 +2,17 @@ version: '3.8'
 
 services:
   echo-server:
-    # this tell Docker Compose to build image from
-    # local (.) directory
+    # Docker Compose에서 로컬 (.) 디렉터리로부터
+    # 이미지를 빌드하도록 명령한다.
     build: .
 
-    # this is equivalent to "-p" option of
-    # the "docker build" command
+    # 다음은 "docker build" 명령어에
+    # "-p" 옵션을 이용한 것과 동일하다.
     ports:
     - "5000:5000"
 
-    # this is equivalent to "-t" option of
-    # the "docker build" command
+    # 다음은 "docker build" 명령어에
+    # "-t" 옵션을 이용한 것과 동일하다.
     tty: true
 
   database:

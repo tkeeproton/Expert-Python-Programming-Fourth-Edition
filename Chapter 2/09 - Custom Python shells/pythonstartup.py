@@ -1,5 +1,4 @@
 # python startup file
-
 import atexit
 import os
 
@@ -10,11 +9,11 @@ except ImportError:
 else:
     import rlcompleter
 
-    # tab completion
+    # 탬 완성
     readline.parse_and_bind("tab: complete")
 
-    # Path to history file in user's home directory.
-    # Can use your own path.
+    # 사용자의 홈 디렉터리에 대한 히스토리 파일 경로.
+    # 사용자 경로를 이용해도 좋다.
     history_file = os.path.join(os.environ["HOME"], ".python_shell_history")
     try:
         readline.read_history_file(history_file)
