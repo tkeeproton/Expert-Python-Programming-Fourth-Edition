@@ -1,7 +1,6 @@
 """
-"Asynchronous programming" section example showing how
-to use aiohttp to perform asynchronous HTTP calls
-
+"비동기 프로그래밍"절 예시
+aiohttp를 이용해 비동기 HTTP 호출을 수행하는 방법을 설명한다
 """
 import asyncio
 import time

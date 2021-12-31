@@ -1,8 +1,7 @@
 """
-"Multiprocessing" section example showing how
-to use pipes from `multiprocessing` module
-as communication channel.
-
+"멀티프로세싱"절 예시
+`multiprocessing` 모듈의 파이프를
+커뮤니케이션 채널로 이용하는 방법을 설명한다.
 """
 from multiprocessing import Process, Pipe
 

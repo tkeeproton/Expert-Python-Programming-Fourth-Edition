@@ -1,5 +1,4 @@
 import itertools
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 
@@ -10,7 +9,6 @@ def rects_collide(rect1, rect2):
         ┌─────(x2, y2)
         │           │
         (x1, y1)────┘
-
     """
     return (
         rect1.x1 < rect2.x2
@@ -20,18 +18,7 @@ def rects_collide(rect1, rect2):
     )
 
 
-class ColliderABC(ABC):
-    @property
-    @abstractmethod
-    def bounding_box(self):
-        ...
-
-
 def find_collisions(objects):
-    for item in objects:
-        if not isinstance(item, ColliderABC):
-            raise TypeError(f"{item} is not a collider")
-
     return [
         (item1, item2)
         for item1, item2 in itertools.combinations(objects, 2)
@@ -48,7 +35,7 @@ class Box:
 
 
 @dataclass
-class Square(ColliderABC):
+class Square:
     x: float
     y: float
     size: float
@@ -59,7 +46,7 @@ class Square(ColliderABC):
 
 
 @dataclass
-class Rect(ColliderABC):
+class Rect:
     x: float
     y: float
     width: float
@@ -71,7 +58,7 @@ class Rect(ColliderABC):
 
 
 @dataclass
-class Circle(ColliderABC):
+class Circle:
     x: float
     y: float
     radius: float
@@ -92,25 +79,7 @@ class Point:
     y: float
 
 
-@dataclass
-class PointWithABC(ColliderABC):
-    x: float
-    y: float
-
-
 if __name__ == "__main__":
-    print("Valid attempt:")
-    for collision in find_collisions(
-        [
-            Square(0, 0, 10),
-            Rect(5, 5, 20, 20),
-            Square(15, 20, 5),
-            Circle(1, 1, 2),
-        ]
-    ):
-        print(collision)
-
-    print("Invalid attempt")
     for collision in find_collisions(
         [
             Square(0, 0, 10),
@@ -118,18 +87,6 @@ if __name__ == "__main__":
             Square(15, 20, 5),
             Circle(1, 1, 2),
             Point(100, 200),
-        ]
-    ):
-        print(collision)
-
-    print("Invalid attempt using PointWithABC")
-    for collision in find_collisions(
-        [
-            Square(0, 0, 10),
-            Rect(5, 5, 20, 20),
-            Square(15, 20, 5),
-            Circle(1, 1, 2),
-            PointWithABC(100, 200),
         ]
     ):
         print(collision)

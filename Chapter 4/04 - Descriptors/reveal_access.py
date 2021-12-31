@@ -1,6 +1,6 @@
 class RevealAccess(object):
-    """A data descriptor that sets and returns values
-    normally and prints a message logging their access.
+    """데이터 데커레이터로 일반적으로 값을 설정하고 반환하며,
+       접근에 대한 로깅 메시지를 출력한다.
     """
 
     def __init__(self, initval=None, name="var"):

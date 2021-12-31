@@ -1,8 +1,7 @@
 """
-"An example of a threaded application" section example
-showing how throttling / rate limiting can be implemented
-in multithreaded application
-
+"스로멀티스레드 애플리케이션 예시"절 예시
+멀티스레드 애플리케이션에서 스로탈링/비율 제한을 
+구현하는 방법을 소개한다
 """
 import time
 from queue import Queue, Empty
@@ -28,23 +27,23 @@ class Throttle:
         with self._consume_lock:
             now = time.time()
 
-            # time measument is initialized on first
-            # token request to avoid initial bursts
+            # 시간 측정은 첫 번째 토큰에 대해 초기화함으로써
+            # 초기 부하를 줄인다.
             if self.last is None:
                 self.last = now
 
             elapsed = now - self.last
 
-            # make sure that quant of passed time is big
-            # enough to add new tokens
+            # 초과된 시간이 새로운 토큰을 추가할 만큼
+            # 충분히 긴 지 확인한다
             if elapsed * self.rate > 1:
                 self.tokens += elapsed * self.rate
                 self.last = now
 
-            # never over-fill the bucket
+            # 버킷을 초과해서 채우지 않는다	
             self.tokens = min(self.rate, self.tokens)
 
-            # finally dispatch tokens if available
+            # 마지막으로 가능한 경우 토큰을 보낸다
             if self.tokens >= amount:
                 self.tokens -= amount
                 return amount
@@ -57,7 +56,7 @@ def fetch_rates(base):
 
     response.raise_for_status()
     rates = response.json()["rates"]
-    # note: same currency exchanges to itself 1:1
+    # 노트: 동일 화폐는 1:1로 환전한다
     rates[base] = 1.0
     return base, rates
 

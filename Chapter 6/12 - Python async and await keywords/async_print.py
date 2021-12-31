@@ -1,7 +1,6 @@
 """
-"Asynchronous programming" section example showing simple
-asynchronous printing of numbers sequence.
-
+"비동기 프로그래밍"절 예시
+numbers 수열을 비동기 출력하는 간단한 예시다.
 """
 import asyncio
 import random

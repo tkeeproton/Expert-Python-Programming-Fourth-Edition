@@ -1,8 +1,7 @@
 """
-"An example of a threaded application" section example
-showing how throttling / rate limiting can be implemented
-in multithreaded application
-
+"멀티스레드 애플리케이션 예시"절 예시
+멀티스레드 애플리케이션에서 스로틀링 / 비율 제한을
+구현하는 방법을 소개한다.
 """
 import random
 import time
@@ -22,12 +21,12 @@ def fetch_rates(base):
     response = requests.get(f"https://api.vatcomply.com/rates?base={base}")
 
     if random.randint(0, 5) < 1:
-        # simulate error by overriding status code
+        # 상태 코드를 오버라이딩해서 에러를 시뮬레이션한다
         response.status_code = 500
 
     response.raise_for_status()
     rates = response.json()["rates"]
-    # note: same currency exchanges to itself 1:1
+    # 노트: 동일 화폐는 1:1로 환전한다
     rates[base] = 1.0
     return base, rates
 

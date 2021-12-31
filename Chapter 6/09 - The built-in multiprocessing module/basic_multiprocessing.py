@@ -1,14 +1,14 @@
 """
-"Multiprocessing" section example showing how
-to create new processes with `multiprocessing` module
-
+"멀티프로세싱"절 예시
+`multiprocessing` 모듈을 이용해 새로운 프로세스들을
+생성하는 방법을 설명한다.
 """
 from multiprocessing import Process
 import os
 
 
 def work(identifier):
-    print(f"Hey, I am the process " f"{identifier}, pid: {os.getpid()}")
+    print(f'Hey, I am the process ' f'{identifier}, pid: {os.getpid()}')
 
 
 def main():

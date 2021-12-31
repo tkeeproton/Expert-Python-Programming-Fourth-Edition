@@ -1,8 +1,7 @@
 """
-"Multiprocessing" section example showing how
-to spawn new process using os.fork on POSIX
-systems.
-
+"멀티프로세싱"절 예시
+POSIX 시스템에서 os.fork를 이용해
+새로운 프로세스를 생성하는 방법을 소개한다
 """
 import os
 

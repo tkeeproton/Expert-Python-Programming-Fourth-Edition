@@ -8,15 +8,14 @@ class lazy_class_attribute(object):
 
     def __get__(self, obj, cls):
         value = self.fget(obj or cls)
-        # note: storing in class object not its instance
-        #       no matter if its a class-level or
-        #       instance-level access
+        # note: 인스턴스가 아닌 클래스 객체에 저장한다.
+        #       클래스-레벨 또는 인스턴스-레벨 접근과 관계없다.
         setattr(cls, self.fget.__name__, value)
         return value
 
 
 class ObjectUsingShaderProgram(object):
-    # trivial pass-through vertex shader implementation
+    # 전형적인 pass-through vertex shader 구현
     VERTEX_CODE = """ 
         #version 330 core 
         layout(location = 0) in vec4 vertexPosition; 
@@ -24,8 +23,8 @@ class ObjectUsingShaderProgram(object):
             gl_Position =  vertexPosition; 
         } 
     """
-    # trivial fragment shader that results in everything
-    # drawn with white color
+    # 전형적인 프래그먼트 셰이더 
+    # 모든 요소를 흰색으로 그린다.
     FRAGMENT_CODE = """ 
         #version 330 core 
         out lowp vec4 out_color; 

@@ -1,8 +1,7 @@
 """
-"Multiprocessing" section example showing how
-to use sharedctypes submodule to share data
-between multiple processes.
-
+"멀티프로세싱"절 예시
+sharedctype 서브모듈을 이용해 여러 프로세스 사이에서
+데이터를 공유하는 방법을 설명한다.
 """
 from multiprocessing import Process, Value, Array
 

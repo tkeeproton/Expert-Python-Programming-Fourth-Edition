@@ -4,23 +4,23 @@ class Vector:
         self.y = y
 
     def __add__(self, other):
-        """Add two vectors using + operator"""
+        """+ 연산자를 이용해 두 벡터를 더한다"""
         return Vector(
             self.x + other.x,
             self.y + other.y,
         )
 
     def __sub__(self, other):
-        """Subtract two vectors using - operator"""
+        """- 연선자를 이용해 두 벡터를 뺀다"""
         return Vector(
             self.x - other.x,
             self.y - other.y,
         )
 
     def __repr__(self):
-        """Return textual representation of vector"""
+        """벡터의 텍스트 표현을 반환한다"""
         return f"<Vector: x={self.x}, y={self.y}>"
 
     def __eq__(self, other):
-        """Compare two vectors for equality"""
+        """두 백터의 동일 여부를 비교한다"""
         return self.x == other.x and self.y == other.y

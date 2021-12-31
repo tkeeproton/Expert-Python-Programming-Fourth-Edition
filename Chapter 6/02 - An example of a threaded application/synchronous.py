@@ -11,7 +11,7 @@ def fetch_rates(base):
     response.raise_for_status()
     rates = response.json()["rates"]
 
-    # note: same currency exchanges to itself 1:1
+    # 노트: 동일 화폐는 1:1로 환전한다
     rates[base] = 1.0
 
     rates_line = ", ".join([f"{rates[symbol]:7.03} {symbol}" for symbol in SYMBOLS])

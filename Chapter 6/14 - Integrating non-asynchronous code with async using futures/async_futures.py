@@ -1,8 +1,8 @@
 """
-"Asynchronous programming" section example showing
-how to employ `futures` and threading/multiprocessing
-to use non-async libraries in asyncio-based applications
-
+"비동기 프로그래밍"절 예시
+`futures`와 스레딩/멀티스레딩를 적용해
+asyncio 기반 애플리케이션에서 비동기가 아닌 라이브러리를
+이용하는 방법을 설명한다.
 """
 import asyncio
 import time
@@ -22,7 +22,7 @@ async def fetch_rates(base):
     )
     response.raise_for_status()
     rates = response.json()["rates"]
-    # note: same currency exchanges to itself 1:1
+    # 노트: 동일 통화는 1:1로 환전한다
     rates[base] = 1.0
     return base, rates
 

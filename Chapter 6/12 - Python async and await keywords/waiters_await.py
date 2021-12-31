@@ -1,8 +1,7 @@
 """
-"Asynchronous programming" section example showing how
-two coroutines cooperate by releasing control to event
-loop on blocking calls.
-
+"비동기 프로그래밍"절 예시
+두 개의 코루틴이 블로킹 호출에 대한 이벤트 루프에서
+통제를 릴리스함으로서 협업하는 방법을 설명한다.
 """
 import asyncio
 import random

@@ -1,6 +1,8 @@
 import itertools
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
+
+from zope.interface import Interface, Attribute, implementer, invariant
+from zope.interface.verify import verifyObject
 
 
 def rects_collide(rect1, rect2):
@@ -10,7 +12,6 @@ def rects_collide(rect1, rect2):
         ┌─────(x2, y2)
         │           │
         (x1, y1)────┘
-
     """
     return (
         rect1.x1 < rect2.x2
@@ -20,17 +21,10 @@ def rects_collide(rect1, rect2):
     )
 
 
-class ColliderABC(ABC):
-    @property
-    @abstractmethod
-    def bounding_box(self):
-        ...
-
-
 def find_collisions(objects):
     for item in objects:
-        if not isinstance(item, ColliderABC):
-            raise TypeError(f"{item} is not a collider")
+        verifyObject(ICollidable, item)
+        ICollidable.validateInvariants(item)
 
     return [
         (item1, item2)
@@ -39,6 +33,19 @@ def find_collisions(objects):
     ]
 
 
+class IBBox(Interface):
+    x1 = Attribute("lower-left x coordinate")
+    y1 = Attribute("lower-left y coordinate")
+    x2 = Attribute("upper-right x coordinate")
+    y2 = Attribute("upper-right y coordinate")
+
+
+class ICollidable(Interface):
+    bounding_box = Attribute("Object's bounding box")
+    invariant(lambda self: verifyObject(IBBox, self.bounding_box))
+
+
+@implementer(IBBox)
 @dataclass
 class Box:
     x1: float
@@ -47,8 +54,9 @@ class Box:
     y2: float
 
 
+@implementer(ICollidable)
 @dataclass
-class Square(ColliderABC):
+class Square:
     x: float
     y: float
     size: float
@@ -58,8 +66,9 @@ class Square(ColliderABC):
         return Box(self.x, self.y, self.x + self.size, self.y + self.size)
 
 
+@implementer(ICollidable)
 @dataclass
-class Rect(ColliderABC):
+class Rect:
     x: float
     y: float
     width: float
@@ -70,8 +79,9 @@ class Rect(ColliderABC):
         return Box(self.x, self.y, self.x + self.width, self.y + self.height)
 
 
+@implementer(ICollidable)
 @dataclass
-class Circle(ColliderABC):
+class Circle:
     x: float
     y: float
     radius: float
@@ -86,16 +96,15 @@ class Circle(ColliderABC):
         )
 
 
+@implementer(ICollidable)
 @dataclass
 class Point:
     x: float
     y: float
 
-
-@dataclass
-class PointWithABC(ColliderABC):
-    x: float
-    y: float
+    @property
+    def bounding_box(self):
+        return self
 
 
 if __name__ == "__main__":
@@ -118,18 +127,6 @@ if __name__ == "__main__":
             Square(15, 20, 5),
             Circle(1, 1, 2),
             Point(100, 200),
-        ]
-    ):
-        print(collision)
-
-    print("Invalid attempt using PointWithABC")
-    for collision in find_collisions(
-        [
-            Square(0, 0, 10),
-            Rect(5, 5, 20, 20),
-            Square(15, 20, 5),
-            Circle(1, 1, 2),
-            PointWithABC(100, 200),
         ]
     ):
         print(collision)

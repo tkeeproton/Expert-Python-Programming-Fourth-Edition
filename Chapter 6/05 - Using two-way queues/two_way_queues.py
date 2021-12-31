@@ -1,8 +1,7 @@
 """
-"An example of a threaded application" section example
-showing how to use two-way queues as inter-thread
-communication method.
-
+"멀티스레드 애플리케이션 예시"절 예시
+양방향 큐를 스레드간 통신 방법으로
+아용하는 방법으로 소개한다.
 """
 import time
 from queue import Queue, Empty
@@ -22,7 +21,7 @@ def fetch_rates(base):
 
     response.raise_for_status()
     rates = response.json()["rates"]
-    # note: same currency exchanges to itself 1:1
+    # 노트: 동일 화폐는 1:1로 환전한다
     rates[base] = 1.0
     return base, rates
 

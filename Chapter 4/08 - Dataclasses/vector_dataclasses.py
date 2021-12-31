@@ -7,14 +7,14 @@ class Vector:
     y: int
 
     def __add__(self, other):
-        """Add two vectors using + operator"""
+        """+ 연산자를 이용해 두 벡터를 더한다"""
         return Vector(
             self.x + other.x,
             self.y + other.y,
         )
 
     def __sub__(self, other):
-        """Subtract two vectors using - operator"""
+        """- 연산자를 이용해 두 벡터를 뺀다"""
         return Vector(
             self.x - other.x,
             self.y - other.y,

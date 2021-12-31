@@ -1,8 +1,7 @@
 """
-"An example of a threaded application" section example
-showing how to use `threading` module in simplest
-one-thread-per-item fashion.
-
+"멀티스레드 애플리케이션 예시"절 예시.
+가장 간단한 아이템 당 단일 스레드 형태로 
+`threading` 모듈 사용 예시를 소개한다.
 """
 import time
 from threading import Thread
@@ -18,7 +17,7 @@ def fetch_rates(base):
 
     response.raise_for_status()
     rates = response.json()["rates"]
-    # note: same currency exchanges to itself 1:1
+    # 노트: 동일 화폐는 1:1로 환전한다
     rates[base] = 1.0
 
     rates_line = ", ".join([f"{rates[symbol]:7.03} {symbol}" for symbol in SYMBOLS])

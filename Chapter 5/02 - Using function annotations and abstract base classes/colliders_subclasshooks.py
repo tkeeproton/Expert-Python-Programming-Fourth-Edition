@@ -4,12 +4,12 @@ from dataclasses import dataclass
 
 
 def rects_collide(rect1, rect2):
-    """Check collision between rectangles
+    """두 사각형이 겹쳐졌는지 확인한다.
 
-    Rectangle coordinates:
-        ┌───(x2, y2)
-        │       │
-      (x1, y1)──┘
+    사각형의 좌표:
+        ┌─────(x2, y2)
+        │           │
+        (x1, y1)────┘
     """
     return (
         rect1.x1 < rect2.x2
