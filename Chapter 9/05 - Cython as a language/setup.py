@@ -3,13 +3,11 @@ import os
 from setuptools import setup, Extension
 
 try:
-    # cython source to source compilation available
-    # only when Cython is available
+    # cython 소스-대-소스 컴파일은 다음 경우에만 이용할 수 있다
+    # Cython을 사용할 수 있으며, 특정한 환경 변수를 이용해서
+    # Cython을 이용해 C 소스 코드를 생성한다고
+    # 명시적으로 지정해야 한다.
     import Cython
-
-    # and specific environment variable says
-    # explicitely that Cython should be used
-    # to generate C sources
     USE_CYTHON = bool(os.environ.get("USE_CYTHON"))
 
 except ImportError:
@@ -28,9 +26,8 @@ setup(
     name="fibonacci",
     ext_modules=extensions,
     extras_require={
-        # Cython will be set in that specific version
-        # as a requirement if package will be intalled
-        # with '[with-cython]' extra feature
+        # 패키지를 `[with-cython]` 추가 피처와 함께 설치하게 된다면,
+        # Cython은 해당 해키지 버전을 설치해야 한다.
         "with-cython": ["cython==0.29.22"]
     },
 )

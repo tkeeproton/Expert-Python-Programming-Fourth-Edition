@@ -1,4 +1,4 @@
-"""Cython module that provides fibonacci sequence function."""
+"""피보나치 수열 함수를 제공하는 파이썬 모듈"""
 
 
 cdef long long fibonacci_cc(unsigned int n):
@@ -11,7 +11,7 @@ cdef long long fibonacci_cc(unsigned int n):
 
 
 def fibonacci(unsigned int n):
-    """ Return nth Fibonacci sequence number computed recursively
+    """피보나치 수열의 n번째 요소를 재귀적으로 계산해서 반환한다.
     """
     with nogil:
         result = fibonacci_cc(n)

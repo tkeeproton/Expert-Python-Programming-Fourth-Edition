@@ -6,23 +6,23 @@ from ctypes.util import find_library
 libc = ctypes.cdll.LoadLibrary(find_library("c"))
 
 CMPFUNC = ctypes.CFUNCTYPE(
-    # return type
+    # 반환 타입
     ctypes.c_int,
-    # first argument type
+    # 첫 번째 인수 타입
     ctypes.POINTER(ctypes.c_int),
-    # second argument type
+    # 두 번째 인수 타입
     ctypes.POINTER(ctypes.c_int),
 )
 
 
 def ctypes_int_compare(a, b):
-    # arguments are pointers so we access using [0] index
+    # 인수는 포인터이므로 [0] 인덱스를 이용해 접근한다.
     print(" %s cmp %s" % (a[0], b[0]))
 
-    # according to qsort specification this should return:
-    # * less than zero if a < b
-    # * zero if a == b
-    # * more than zero if a > b
+    # qsort 명세에 따라 이는 다음을 반환한다:
+    # * 0 미만의 값, if a < b
+    # * 0, if a == b
+    # * 0 초과의 값, if a > b
     return a[0] - b[0]
 
 
@@ -31,20 +31,20 @@ def main():
     shuffle(numbers)
     print("shuffled: ", numbers)
 
-    # create new type representing array with lenght
-    # same as the lenght of numbers list
+    # numbers 리스트의 길이와 동일한 길이의 배열을
+    # 나타내는 새로운 타입을 생성한다
     NumbersArray = ctypes.c_int * len(numbers)
-    # create new C array using a new type
+    # 새로운 타입을 이용해 새로운 C 배열을 생성한다
     c_array = NumbersArray(*numbers)
 
     libc.qsort(
-        # pointer to the sorted array
+        # 정렬된 배열에 대한 포인터
         c_array,
-        # length of the array
+        # 배열의 길이
         len(c_array),
-        # size of single array element
+        # 배열의 개별 요소의 크기
         ctypes.sizeof(ctypes.c_int),
-        # callback (pointer to the C comparison function)
+        # 콜백(C 해당 함수에 대한 포인터)
         CMPFUNC(ctypes_int_compare),
     )
     print("sorted:   ", list(c_array))

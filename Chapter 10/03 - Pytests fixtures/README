@@ -1,3 +1,4 @@
-To execute tests in this directory please run redis locally.
-You can use `docker-compose up` command to start redis as a
-docker container.
+이 디렉터리의 테스트 케이스를 실행할 때는 redis를 로컬에서 실행한다.
+
+`docker-compose up` 명령어를 이용하면 reids를 도커 컨테이너로
+실행할 수 있다.

@@ -3,7 +3,7 @@ import email.message
 
 
 def send(sender, to, subject="None", body="None", server="localhost"):
-    """sends a message."""
+    """메시지를 전송한다."""
     message = email.message.Message()
     message["To"] = to
     message["From"] = sender
